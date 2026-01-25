@@ -1,4 +1,4 @@
-# 🧠 AI Task Management & Assignment System
+# 🧠 AI Powered Task Management & Assignment System
 
 A self-learning task assignment engine that automatically optimizes team productivity by learning from real task completion results.
 
