@@ -1,4 +1,4 @@
-# 🧠 AI Powered Task Management & Assignment System
+# 🧠 ML Powered Task Management & Assignment System using Agile Technology
 
 A self-learning task assignment engine that automatically optimizes team productivity by learning from real task completion results.
 
