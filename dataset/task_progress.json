@@ -1,0 +1,16 @@
+{
+  "1_1": {
+    "task_id": 1,
+    "user_id": 1,
+    "user_name": "TestUser123",
+    "task_type": "Test Task 1",
+    "complexity": 0.5,
+    "deadline": 10,
+    "start_time": "2026-03-22T14:28:20.288581",
+    "status": "completed",
+    "progress_updates": [],
+    "completion_time": "2026-03-22T14:30:37.613039",
+    "actual_time_taken": 5.0,
+    "actual_duration": 0.04
+  }
+}

@@ -6,17 +6,24 @@ import os
 from datetime import datetime
 import json
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATASET_DIR = os.path.join(BASE_DIR, 'dataset')
+MODEL_DIR = os.path.join(BASE_DIR, 'model')
+
 class TaskAssignmentEngine:
     def __init__(self):
         self.model = None
         self.is_trained = False
-        self.results_file = "results.csv"
-        self.progress_file = "task_progress.json"
+        self.results_file = os.path.join(DATASET_DIR, "results.csv")
+        self.progress_file = os.path.join(DATASET_DIR, "task_progress.json")
+        self.model_file = os.path.join(MODEL_DIR, "assignment_model.pkl")
+        self.users_file = os.path.join(DATASET_DIR, "users.csv")
+        self.tasks_file = os.path.join(DATASET_DIR, "tasks.csv")
         
     def load_data(self):
         """Load users, tasks, and results"""
-        self.users = pd.read_csv("users.csv")
-        self.tasks = pd.read_csv("tasks.csv")
+        self.users = pd.read_csv(self.users_file)
+        self.tasks = pd.read_csv(self.tasks_file)
         
         # Load results if exists
         if os.path.exists(self.results_file):
@@ -83,13 +90,13 @@ class TaskAssignmentEngine:
         self.is_trained = True
         
         # Save model
-        joblib.dump(self.model, 'assignment_model.pkl')
+        joblib.dump(self.model, self.model_file)
         print("✅ Model trained and saved")
         
     def load_model(self):
         """Load existing model if available"""
-        if os.path.exists('assignment_model.pkl'):
-            self.model = joblib.load('assignment_model.pkl')
+        if os.path.exists(self.model_file):
+            self.model = joblib.load(self.model_file)
             self.is_trained = True
             print("✅ Loaded existing model")
         

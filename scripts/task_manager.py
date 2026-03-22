@@ -1,5 +1,11 @@
 from assignment_engine import TaskAssignmentEngine
 import pandas as pd
+import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATASET_DIR = os.path.join(BASE_DIR, 'dataset')
+USERS_FILE = os.path.join(DATASET_DIR, "users.csv")
+TASKS_FILE = os.path.join(DATASET_DIR, "tasks.csv")
 
 class TaskManager:
     def __init__(self):
@@ -60,7 +66,7 @@ class TaskManager:
             new_id = int(self.engine.users['user_id'].max()) + 1
         new_user = pd.DataFrame({'user_id': [new_id], 'name': [name]})
         self.engine.users = pd.concat([self.engine.users, new_user], ignore_index=True)
-        self.engine.users.to_csv("users.csv", index=False)
+        self.engine.users.to_csv(USERS_FILE, index=False)
         print(f"✅ Added user: {name} (ID: {new_id})")
         return new_id
         
@@ -77,7 +83,7 @@ class TaskManager:
             'deadline': [deadline]
         })
         self.engine.tasks = pd.concat([self.engine.tasks, new_task], ignore_index=True)
-        self.engine.tasks.to_csv("tasks.csv", index=False)
+        self.engine.tasks.to_csv(TASKS_FILE, index=False)
         print(f"✅ Added task: {task_type} (ID: {new_id}, Complexity: {complexity}, Deadline: {deadline}h)")
         return new_id
     
@@ -94,7 +100,7 @@ class TaskManager:
         
         # Remove user from dataframe
         self.engine.users = self.engine.users[self.engine.users['user_id'] != user_id]
-        self.engine.users.to_csv("users.csv", index=False)
+        self.engine.users.to_csv(USERS_FILE, index=False)
         
         # Also remove user's results (optional - keeps data integrity)
         self.engine.results = self.engine.results[self.engine.results['user_id'] != user_id]
@@ -122,7 +128,7 @@ class TaskManager:
         
         # Remove task from dataframe
         self.engine.tasks = self.engine.tasks[self.engine.tasks['task_id'] != task_id]
-        self.engine.tasks.to_csv("tasks.csv", index=False)
+        self.engine.tasks.to_csv(TASKS_FILE, index=False)
         
         # Also remove task's results
         self.engine.results = self.engine.results[self.engine.results['task_id'] != task_id]
