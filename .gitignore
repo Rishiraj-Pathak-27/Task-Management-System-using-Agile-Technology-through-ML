@@ -11,6 +11,7 @@ ENV/
 
 # AI Models (these will be generated)
 *.pkl
+!model/assignment_model.pkl
 
 # IDE
 .vscode/
